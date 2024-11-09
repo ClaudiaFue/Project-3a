@@ -3,9 +3,9 @@ version: '3.7'
 services:
   web:
     build:
-      context: .               # Set context to the current directory
-      dockerfile: Dockerfile   # Specify the Dockerfile (if it’s named Dockerfile)
-    image: Project3a_app_image_flask
+      context: .               
+      dockerfile: Dockerfile 
+    image: project3a_app_image_flask
     container_name: Stock_app_Project3a
     ports:
       - "5005:5000"

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Chart Viewer</title>
+</head>
+<body>
+    <h1>Stock Chart Viewer</h1>
+
+    <form method="POST">
+        <label for="symbol">Choose a stock symbol:</label>
+        <select name="symbol" id="symbol">
+            {% for symbol in stock_symbols %}
+                <option value="{{ symbol }}">{{ symbol }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="chart_type">Choose chart type:</label>
+        <select name="chart_type" id="chart_type">
+            <option value="line">Line Chart</option>
+            <option value="bar">Bar Chart</option>
+        </select>
+        <br><br>
+
+        <label for="function">Choose time series function:</label>
+        <select name="function" id="function">
+            <option value="TIME_SERIES_INTRADAY">Intraday</option>
+            <option value="TIME_SERIES_DAILY">Daily</option>
+        </select>
+        <br><br>
+
+        <label for="start_date">Start Date (YYYY-MM-DD):</label>
+        <input type="text" name="start_date" id="start_date" required>
+        <br><br>
+
+        <label for="end_date">End Date (YYYY-MM-DD):</label>
+        <input type="text" name="end_date" id="end_date" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    {% if chart_img %}
+        <h2>Generated Chart</h2>
+        {% if chart_img.startswith('Error') %}
+            <p>{{ chart_img }}</p>
+        {% else %}
+            <img src="data:image/png;base64,{{ chart_img }}" alt="Stock Chart">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
+
